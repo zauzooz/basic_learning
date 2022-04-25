@@ -17,18 +17,21 @@ def average(listNum):
 
 
 def thread_client(conn, addr, host):
+    global listNum
     print("Host %d connect to the server." % (host))
     while(True):
         # recieve data
         client_data = conn.recv(1024).decode()
         listNum.append(int(client_data))
         print("Client %d: %s" % (host, client_data))
+        sleep(5)
         # update data
         server_data = str(average(listNum))
         # send data
         conn.send(server_data.encode())
-        sleep(5)
-        print("At %d, listNum has %d data." % (host, len(listNum)))
+        print("At host %d work, listNum has %d data." % (host, len(listNum)))
+        if (host + 1 == len(listNum)):
+            listNum.clear()
 
 
 try:

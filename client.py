@@ -20,6 +20,7 @@ server_data = INIT
 while (True):
     # send data
     client_data = str(server_data + random.randint(0, 10))
+    print("Send %d" % (int(client_data)))
     socketClient.send(client_data.encode())
     # recieve data
     server_data = int(socketClient.recv(1024).decode())
