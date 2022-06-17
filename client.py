@@ -1,6 +1,8 @@
 import socket
 import random
 
+from sqlalchemy import true
+
 INIT = 0
 
 try:
@@ -11,8 +13,12 @@ except socket.error as error:
 host = socket.gethostname()
 port = 9999
 end_point = (host, port)
-
-socketClient.connect(end_point)
+while (true):
+    try:
+        socketClient.connect(end_point)
+        break
+    except:
+        pass
 
 server_data = INIT
 
